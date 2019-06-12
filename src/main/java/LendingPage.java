@@ -1,14 +1,18 @@
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
-public class LendingPage {
-    @FindBy (how = How.ID, using =  "twotabsearchtextbox") private WebElement searchField;
+public class LendingPage extends CommonPom {
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"nav-search\"]/form/div[2]/div/input") private WebElement submitSearch;
+    @FindBy (id = "twotabsearchtextbox") private WebElement searchField;
+    @FindBy(xpath = "//*[@id=\"nav-search\"]/form/div[2]/div/input") private WebElement submitSearch;
 
-    public  void typeAndSubmitTextInSerchField() {
-        searchField.sendKeys("Iphone 6");
-        submitSearch.click();
+    public LendingPage(WebDriver driver){
+        super(driver);
+    }
+
+    public void typeAndSubmitTextInSerchField(WebDriver driver) {
+        sendKeysToAnInputBox(driver,searchField,"Iphone 6");
+        clickOnElement(driver,submitSearch);
     }
 }

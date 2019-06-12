@@ -1,19 +1,23 @@
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
 import java.util.ArrayList;
 
 
-public class IphoneSixSearchResults {
+public class IphoneSixSearchResults extends CommonPom{
+
+
+
     private ArrayList <IphoneSix> iphoneSixResults;
     private IphoneSix firstResult;
     private IphoneSix secondResult;
     private IphoneSix thirdResult;
 
-
-    public IphoneSixSearchResults(){
+    public IphoneSixSearchResults(WebDriver driver){
+        super(driver);
         iphoneSixResults = new ArrayList<IphoneSix>();
+
     }
 
     final String firstIphoneName =  "div[data-cel-widget=\"search_result_0\"] span[class=\"a-size-medium a-color-base a-text-normal\"]";
@@ -25,19 +29,18 @@ public class IphoneSixSearchResults {
     final String thirdPrice ="div[data-cel-widget=\"search_result_2\"] span[class=\"a-price-whole\"]";
 
 
+    @FindBy(css = firstIphoneName) private WebElement firstLinkNameResult;
+    @FindBy(css = firstPrice) private WebElement firstPriceResult;
 
-    @FindBy(how = How.CSS , using = firstIphoneName) private WebElement firstLinkNameResult;
-    @FindBy(how = How.CSS , using = firstPrice) private WebElement firstPriceResult;
+    @FindBy(css = secondIphoneName) private WebElement secondLinkNameResult;
+    @FindBy(css = secondPrice) private WebElement secondPriceResult;
 
-    @FindBy(how = How.CSS , using = secondIphoneName) private WebElement secondLinkNameResult;
-    @FindBy(how = How.CSS , using = secondPrice) private WebElement secondPriceResult;
-
-    @FindBy(how = How.CSS , using = thirdIphoneName) private WebElement thirdLinkNameResult;
-    @FindBy(how = How.CSS , using = thirdPrice) private WebElement thirdPriceResult;
+    @FindBy(css = thirdIphoneName) private WebElement thirdLinkNameResult;
+    @FindBy(css = thirdPrice) private WebElement thirdPriceResult;
 
 
-    public IphoneSix returnBestIphoneChoise(){
-        CreateIphoneSix();
+    public IphoneSix returnBestIphoneChoise(WebDriver driver){
+        CreateIphoneSix(driver);
         return returnCheapeastResult();
     }
 
@@ -50,21 +53,20 @@ public class IphoneSixSearchResults {
         }
         return cheapestIphone;
     }
-    private void  CreateIphoneSix(){
+    private void  CreateIphoneSix(WebDriver driver){
 
-        firstResult = new IphoneSix(firstLinkNameResult.getText(),(converDollarToILS(firstPriceResult)));
-        secondResult = new IphoneSix(secondLinkNameResult.getText(),(converDollarToILS(secondPriceResult)));
-        thirdResult = new IphoneSix(thirdLinkNameResult.getText(),(converDollarToILS(thirdPriceResult)));
+        firstResult = new IphoneSix(getTextElement(driver,firstLinkNameResult,firstIphoneName),(converDollarToILS(driver,firstPriceResult,firstPrice)));
+        secondResult = new IphoneSix(getTextElement(driver, secondLinkNameResult,secondIphoneName),(converDollarToILS(driver,secondPriceResult,secondPrice)));
+        thirdResult = new IphoneSix(getTextElement(driver,thirdLinkNameResult,thirdIphoneName),(converDollarToILS(driver, thirdPriceResult,thirdPrice)));
 
         iphoneSixResults.add(firstResult);
         iphoneSixResults.add(secondResult);
         iphoneSixResults.add(thirdResult);
-
     }
 
-    private double converDollarToILS(WebElement price){
+    private double converDollarToILS(WebDriver driver, WebElement price, String selector){
         double priceInILS;
-        priceInILS = Integer.parseInt(price.getText()) * 3.6;
+        priceInILS = Integer.parseInt(getTextElement(driver, price,selector)) * 3.6;
          return priceInILS;
     }
 }

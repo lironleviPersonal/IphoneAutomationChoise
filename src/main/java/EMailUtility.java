@@ -13,7 +13,6 @@ public class EMailUtility {
     Properties properties;
     Session session;
 
-
     public EMailUtility(String header, String price) {
         this.header = header;
         this.price = price;
@@ -44,7 +43,6 @@ public class EMailUtility {
         }
         return null;
     }
-
 
     private Session createMailInfrastracture() {
         properties.put("mail.smtp.auth", "true");
