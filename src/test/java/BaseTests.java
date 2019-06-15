@@ -6,8 +6,9 @@ public abstract class BaseTests {
     private String url = "https://www.amazon.com/";
 
     public BaseTests(){
-        System.setProperty("webdriver.chrome.driver", "C:/Users/L/Desktop/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
         chromeDriver = new ChromeDriver();
+        chromeDriver.manage().window().maximize();
     }
 
     protected void navigateToAmazonWebsite(){

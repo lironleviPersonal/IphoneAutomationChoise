@@ -1,3 +1,4 @@
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -19,7 +20,7 @@ public abstract class CommonPom {
 
     protected String getTextElement(WebDriver driver, WebElement element,String selector){
         Waiter.waitForTextToLoad(driver,element,selector);
-        System.out.println("text loaded");
+        Logs.debugging("The Selector that printed is " + selector);
         return element.getText();
     }
 

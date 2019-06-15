@@ -23,7 +23,7 @@ public class EMailUtility {
     public void sendMail() {
         try {
             Transport.send(createMessage(session));
-            System.out.println("message send");
+            Logs.information("Email notification send to lironlevi91@gmailc.com");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
