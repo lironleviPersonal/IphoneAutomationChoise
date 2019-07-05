@@ -7,18 +7,10 @@ import java.util.ArrayList;
 
 public class IphoneSixSearchResults extends CommonPom{
 
-
-
     private ArrayList <IphoneSix> iphoneSixResults;
     private IphoneSix firstResult;
     private IphoneSix secondResult;
     private IphoneSix thirdResult;
-
-    public IphoneSixSearchResults(WebDriver driver){
-        super(driver);
-        iphoneSixResults = new ArrayList<IphoneSix>();
-
-    }
 
     final String firstIphoneName =  "div[data-cel-widget=\"search_result_0\"] span[class=\"a-size-medium a-color-base a-text-normal\"]";
     final String secondIphoneName =  "div[data-cel-widget=\"search_result_1\"] span[class=\"a-size-medium a-color-base a-text-normal\"]";
@@ -26,8 +18,7 @@ public class IphoneSixSearchResults extends CommonPom{
 
     final String firstPrice ="div[data-cel-widget=\"search_result_0\"] span[class=\"a-price-whole\"]";
     final String secondPrice ="div[data-cel-widget=\"search_result_1\"] span[class=\"a-price-whole\"]";
-    final String thirdPrice ="div[data-cel-widget=\"search_result_2\"] span[class=\"a-price-whole\"]";
-
+    final String thirdPrice ="div[data-cel-widget=\"search_result_2\"] span[class=\"a-color-base\"]";
 
     @FindBy(css = firstIphoneName) private WebElement firstLinkNameResult;
     @FindBy(css = firstPrice) private WebElement firstPriceResult;
@@ -38,8 +29,12 @@ public class IphoneSixSearchResults extends CommonPom{
     @FindBy(css = thirdIphoneName) private WebElement thirdLinkNameResult;
     @FindBy(css = thirdPrice) private WebElement thirdPriceResult;
 
+    public IphoneSixSearchResults(WebDriver driver){
+        super(driver);
+        iphoneSixResults = new ArrayList<IphoneSix>();
+    }
 
-    public IphoneSix returnBestIphoneChoise(WebDriver driver){
+    public IphoneSix returnBestIphoneChoice(WebDriver driver){
         CreateIphoneSix(driver);
         return returnCheapeastResult();
     }
@@ -66,7 +61,9 @@ public class IphoneSixSearchResults extends CommonPom{
 
     private double converDollarToILS(WebDriver driver, WebElement price, String selector){
         double priceInILS;
-        priceInILS = Integer.parseInt(getTextElement(driver, price,selector)) * 3.6;
+        String element = getTextElement(driver, price,selector);
+        element = element.replace("$","");
+        priceInILS = Double.parseDouble(element) * 3.6;
          return priceInILS;
     }
 }

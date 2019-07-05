@@ -20,7 +20,7 @@ public abstract class CommonPom {
 
     protected String getTextElement(WebDriver driver, WebElement element,String selector){
         Waiter.waitForTextToLoad(driver,element,selector);
-        Logs.debugging("The Selector that printed is " + selector);
+        Logs.debugging("The Selector that printed is " + selector + " value " + element.getText());
         return element.getText();
     }
 

@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 public class LendingPage extends CommonPom {
 
     @FindBy (id = "twotabsearchtextbox") private WebElement searchField;
-    @FindBy(xpath = "//*[@id=\"nav-search\"]/form/div[2]/div/input") private WebElement submitSearch;
+    @FindBy(xpath = "//*[@class = 'nav-input' and @type='submit']") private WebElement submitSearch;
 
     public LendingPage(WebDriver driver){
         super(driver);

@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class Logs {
 
-    /* Get actual class name to be printed on */
-    private static Logger log = LogManager.getLogger(Logs.class);
+   private static Logger log = LogManager.getLogger(Logs.class);
 
     public static void information(String info){
         log.info(info);

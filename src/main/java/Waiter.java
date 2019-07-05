@@ -15,7 +15,7 @@ public class Waiter {
 
     public static void waitForTextToLoad(WebDriver driver,WebElement element,final String selector) {
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(120, TimeUnit.SECONDS)
+                .withTimeout(60, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(selector)));
