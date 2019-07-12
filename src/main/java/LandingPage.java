@@ -1,0 +1,33 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class LandingPage extends CommonPom {
+    private PropertiesReader preader;
+    private  String url = null;
+
+    @FindBy (id = "twotabsearchtextbox")
+    private WebElement searchField;
+
+    @FindBy(xpath = "//*[@class = 'nav-input' and @type='submit']")
+    private WebElement submitSearch;
+
+    public LandingPage(){
+        super();
+        preader = PropertiesReader.getInstance();
+        url = preader.getProperties();
+    }
+
+    protected void navigateToAmazonWebsite(){
+        navigateToWebstie(url);
+    }
+
+    protected void typeSerchResults() {
+        sendKeysToAnInputBox(searchField,"Iphone 6");
+    }
+
+    protected void submitSearch(){
+        clickOnElement(submitSearch);
+    }
+}
+

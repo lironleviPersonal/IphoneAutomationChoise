@@ -1,10 +1,6 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.io.*;
-import java.sql.SQLException;
-import java.util.*;
 
-import java.io.IOException;
 
 public class Logs {
 
@@ -14,4 +10,5 @@ public class Logs {
         log.info(info);
     }
     public static void debugging (String debug) {log.debug(debug);}
+    public static void error(String error) {log.error(error);}
 }

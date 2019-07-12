@@ -3,33 +3,25 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class EMailUtility {
+public final class EMailUtility {
 
-    private String myEmailAccount = "lironlevi91@gmail.com";
-    private String myPasswordAccount = "8891LK91";
-    private String header;
-    private String price;
+    private static String myEmailAccount = "lironlevi91@gmail.com";
+    private static String myPasswordAccount = "8891LK91";
+    private static Properties properties;
+    private static Session session;
 
-    Properties properties;
-    Session session;
-
-    public EMailUtility(String header, String price) {
-        this.header = header;
-        this.price = price;
-        properties = new Properties();
-        session = createMailInfrastracture();
-    }
-
-    public void sendMail() {
+    public static void sendMail(String header, String price) {
         try {
-            Transport.send(createMessage(session));
+            properties = new Properties();
+            session = createMailInfrastracture();
+            Transport.send(createMessage(session, header, price));
             Logs.information("Email notification send to lironlevi91@gmail.com");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
-    private Message createMessage(Session session) {
+    private static Message createMessage(Session session, String header, String price) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myEmailAccount));
@@ -44,7 +36,7 @@ public class EMailUtility {
         return null;
     }
 
-    private Session createMailInfrastracture() {
+    private static Session createMailInfrastracture() {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -58,10 +50,9 @@ public class EMailUtility {
             }
         });
         return session;
-
     }
 
-    public String getMail() {
+    public static String getMail() {
        String msg = null;
         try {
             Store store = session.getStore("imaps");

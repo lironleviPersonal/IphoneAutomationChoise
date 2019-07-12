@@ -1,22 +1,35 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.util.ArrayList;
 
-public class FindCheapIphone extends BaseTests {
+public class FindCheapIphone {
 
-    private IphoneSix iphone;
+    private ArrayList<IphoneSix> iphoneSixResults;
+    private IphoneSix cheapestIphone;
 
     @Test
     public void findcheaperIphoneFromAmazone() {
-        navigateToAmazonWebsite();
 
-        LendingPage landingPage = new LendingPage(chromeDriver);
-        landingPage.typeAndSubmitTextInSerchField(chromeDriver);
+        LandingPage landingPage = new LandingPage();
+        landingPage.navigateToAmazonWebsite();
+        landingPage.typeSerchResults();
+        landingPage.submitSearch();
 
-        IphoneSixSearchResults iphoneSixSearchResults = new IphoneSixSearchResults(chromeDriver);
-        iphone = iphoneSixSearchResults.returnBestIphoneChoice(chromeDriver);
+        IphoneSixSearchResultsPage iphoneSixSearchResultsPage = new IphoneSixSearchResultsPage();
+        iphoneSixResults = iphoneSixSearchResultsPage.CreateIphoneSix();
+        cheapestIphone = returnCheapeastResult();
 
-        EMailUtility mail = new EMailUtility(iphone.getName(),Double.toString(iphone.getPrice()));
-        mail.sendMail();
-        Assert.assertEquals( mail.getMail(),"Aut Test Name: " + iphone.getName() + " price: " + iphone.getPrice()+"\r\n");
+        EMailUtility.sendMail(cheapestIphone.getName(),Double.toString(cheapestIphone.getPrice()));
+        Assert.assertEquals( EMailUtility.getMail(),"Aut Test Name: " + cheapestIphone.getName() + " price: " + cheapestIphone.getPrice()+"\r\n");
+    }
+
+    private IphoneSix returnCheapeastResult(){
+        IphoneSix cheapestIphone =iphoneSixResults.get(0);
+        for(IphoneSix iphone : iphoneSixResults){
+            if(iphone.getPrice() <  cheapestIphone.getPrice()){
+                cheapestIphone = iphone;
+            }
+        }
+        return cheapestIphone;
     }
 }
