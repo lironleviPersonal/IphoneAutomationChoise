@@ -17,7 +17,7 @@ public class IphoneSixSearchResultsPage extends CommonPom{
 
     final String firstPrice ="div[data-cel-widget=\"search_result_0\"] span[class=\"a-color-base\"]";
     final String secondPrice ="div[data-cel-widget=\"search_result_1\"] span[class=\"a-color-base\"]";
-    final String thirdPrice ="div[data-cel-widget=\"search_result_2\"] span[class=\"a-color-base\"]";
+    final String thirdPrice ="div[data-cel-widget=\"search_result_2\"] span[class=\"a-price-whole\"]";
 
     @FindBy(css = firstIphoneName)
     private WebElement firstLinkNameResult;

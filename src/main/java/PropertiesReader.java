@@ -7,7 +7,8 @@ import java.util.Properties;
 public class PropertiesReader {
 
     private static PropertiesReader propertiesReaderInstance = null;
-    private String prop = null;
+    private static   String url = null;
+    private static String browser = null;
 
     private PropertiesReader() {
         setProperties();
@@ -20,16 +21,22 @@ public class PropertiesReader {
         return propertiesReaderInstance;
     }
 
-    public String getProperties(){
-        return prop;
+    public static String getUrl(){
+        return url;
     }
+
+    public static String getBrowser(){
+        return browser;
+    }
+
     private void setProperties() {
         try {
             InputStream inputStream = new FileInputStream("src/main/resources/config.properties");
 
             Properties properties = new Properties();
             properties.load(inputStream);
-            prop = properties.getProperty("prodUrl");
+            url = properties.getProperty("prodUrl");
+            browser = properties.getProperty("browser");
 
         } catch (FileNotFoundException e) {
             Logs.error("File Not Found In readProperties");

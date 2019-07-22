@@ -1,8 +1,9 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 
-public class FindCheapIphone extends AmazonBaseTest {
+public class FindCheapIphone5 extends AmazonBaseTest {
 
     private ArrayList<IphoneSix> iphoneSixResults;
     private IphoneSix cheapestIphone;

@@ -3,7 +3,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LandingPage extends CommonPom {
-    private PropertiesReader preader;
     private  String url = null;
 
     @FindBy (id = "twotabsearchtextbox")
@@ -14,8 +13,7 @@ public class LandingPage extends CommonPom {
 
     public LandingPage(){
         super();
-        preader = PropertiesReader.getInstance();
-        url = preader.getProperties();
+        url = PropertiesReader.getUrl();
     }
 
     protected void navigateToAmazonWebsite(){
